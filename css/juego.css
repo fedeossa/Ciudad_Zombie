@@ -1,0 +1,45 @@
+body {
+  background-image: url('../imagenes/fondo.png');
+}
+
+canvas {
+  margin: auto;
+  display: flex;
+  margin-top: calc(44vh - 286px);
+}
+
+.boton-recargar {
+  margin: auto;
+  display: flex;
+  background: none;
+  border: none;
+  color: white;
+  font-family: monospace;
+  visibility: hidden;
+  padding: 0px;
+}
+
+/*Firma */
+footer p {
+  font-size: 0.8em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 0px;
+  float: none;
+  background-color: black;
+  color: white;
+}
+a:link {
+  color: white;
+  text-decoration-color: none;
+  text-decoration: none;
+}
+a:hover {
+  color: white;
+  text-decoration: underline;
+}
+a:visited {
+  color: white;
+  background-color: white;
+}
