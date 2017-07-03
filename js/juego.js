@@ -18,6 +18,7 @@ var Juego = {
   ganador: false,
   // Variable para mostrar o no las instrucciones al principio.
   estaJugando: true,
+  pausa: false,
 
   obstaculosCarretera: [
     /*Aca se van a agregar los obstaculos visibles. Tenemos una valla horizontal
@@ -125,16 +126,27 @@ Juego.comenzar = function() {
   los movimientos y el pintado de la pantalla. Sera el encargado de calcular los
   ataques, colisiones, etc*/
   this.dibujarInstrucciones();
-  setTimeout(function(){Juego.buclePrincipal();},2500);
+  setTimeout(function(){Juego.buclePrincipal();},2000);
 };
 
+//Declaro la variable animation para poder detener el juego luego de muerto o cuando gano
+var idAnimation;
+
 Juego.buclePrincipal = function() {
+  if(Juego.pausa) {
+    setTimeout(Juego.buclePrincipal,1000);
+    return;
+  };
+  var self = Juego;
   // Con update se actualiza la logica del juego, tanto ataques como movimientos
-  this.update();
+  self.update();
   // Funcion que dibuja por cada fotograma a los objetos en pantalla.
-  this.dibujar();
+  self.dibujar();
   // Esto es una forma de llamar a la funcion Juego.buclePrincipal() repetidas veces
-  window.requestAnimationFrame(Juego.buclePrincipal.bind(this));
+  idAnimation = window.requestAnimationFrame(function(){self.buclePrincipal()});
+  if (Juego.ganoJuego() || this.terminoJuego() == !this.estaJugando) {
+  window.cancelAnimationFrame(idAnimation);
+  }
 };
 
 Juego.update = function() {
@@ -320,6 +332,15 @@ Juego.ganoJuego = function() {
 
 Juego.iniciarRecursos();
 
+function pausar(tecla){
+  //pausa
+  if (tecla == "p") {
+    Juego.pausa = true;
+  } else {
+    Juego.pausa = false;
+  }
+
+}
 // Activa las lecturas del teclado al presionar teclas
 // Documentacion: https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener
 document.addEventListener('keydown', function(e) {
@@ -327,8 +348,9 @@ document.addEventListener('keydown', function(e) {
     37: 'izq',
     38: 'arriba',
     39: 'der',
-    40: 'abajo'
+    40: 'abajo',
+    80: "p"
   };
-
+  pausar(allowedKeys[e.keyCode])
   Juego.capturarMovimiento(allowedKeys[e.keyCode]);
 });
