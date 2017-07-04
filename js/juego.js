@@ -70,15 +70,17 @@ var Juego = {
     new ZombieCaminante("imagenes/zombie4.png",350,80,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557},0),
     new ZombieCaminante("imagenes/zombie4.png",400,90,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557},0),
 //ZombieConductor
-    new ZombieConductor("imagenes/tren_vertical.png",644,0,30,90,15,{desdeX: 614, hastaX: 674, desdeY: 0, hastaY: 577},"v"),
-    new ZombieConductor("imagenes/tren_vertical.png",678,0,30,90,20,{desdeX: 648, hastaX: 708, desdeY: 0, hastaY: 577},"v"),
-    new ZombieConductor("imagenes/tren_horizontal.png",400,322,90,30,20,{desdeX: 0, hastaX: 961, desdeY: 292, hastaY: 352},"h")
+    new ZombieConductor("imagenes/tren_vertical.png",644,0,30,90,8,{desdeX: 614, hastaX: 674, desdeY: 0, hastaY: 577},"v"),
+    new ZombieConductor("imagenes/tren_vertical.png",678,0,30,90,12,{desdeX: 648, hastaX: 708, desdeY: 0, hastaY: 577},"v"),
+    new ZombieConductor("imagenes/tren_horizontal.png",400,322,90,30,12,{desdeX: 0, hastaX: 961, desdeY: 292, hastaY: 352},"h"),
+//spikeball
+    new spikeball("imagenes/spikeball.png",260,430,16,16,2,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557},0),
+    new spikeball("imagenes/spikeball.png",460,130,16,16,2,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557},0)
   ],
   //Zombies atropellados
   manchaSangre: [
     //aca se van a push los zombies pisados..
   ]
-
 }
 
 /* Se cargan los recursos de las imagenes, para tener un facil acceso
@@ -109,7 +111,8 @@ Juego.iniciarRecursos = function() {
     'imagenes/auto_verde_derecha.png',
     ////////// extras
     "imagenes/blood.png",
-    "imagenes/shield.png"
+    "imagenes/shield.png",
+    "imagenes/spikeball.png"
   ]);
   Resources.onReady(this.comenzar.bind(Juego));
 };
@@ -144,7 +147,8 @@ Juego.buclePrincipal = function() {
   self.dibujar();
   // Esto es una forma de llamar a la funcion Juego.buclePrincipal() repetidas veces
   idAnimation = window.requestAnimationFrame(function(){self.buclePrincipal()});
-  if (Juego.ganoJuego() || this.terminoJuego() == !this.estaJugando) {
+  // Esto es para frezar el juego cuando ganamos o perdemos
+  if (Juego.ganoJuego() || Juego.terminoJuego() == !Juego.estaJugando) {
   window.cancelAnimationFrame(idAnimation);
   }
 };
@@ -245,6 +249,18 @@ Juego.moverEnemigos = function() {
     enemigo.mover();
   })
 };
+//Movimiento spikeball
+Juego.chequearColisionesNem = function(spike,x, y) {
+  //var spike = this.enemigos[11];
+  var puedeMoverse = true
+  Juego.obstaculos().forEach(function(obstaculo) {
+    if (this.intersecan(obstaculo, spike, x, y)) {
+      puedeMoverse = false
+    }
+  }, this)
+  return puedeMoverse
+};
+
 
 /* Recorre los enemigos para ver cual esta colisionando con el jugador
 Si colisiona empieza el ataque el zombie, si no, deja de atacar.
@@ -332,15 +348,16 @@ Juego.ganoJuego = function() {
 
 Juego.iniciarRecursos();
 
-function pausar(tecla){
+//funcion para pausar el juego
+Juego.pausar = function(tecla) {
   //pausa
   if (tecla == "p") {
     Juego.pausa = true;
   } else {
     Juego.pausa = false;
   }
-
 }
+
 // Activa las lecturas del teclado al presionar teclas
 // Documentacion: https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener
 document.addEventListener('keydown', function(e) {
@@ -351,6 +368,6 @@ document.addEventListener('keydown', function(e) {
     40: 'abajo',
     80: "p"
   };
-  pausar(allowedKeys[e.keyCode])
+  Juego.pausar(allowedKeys[e.keyCode])
   Juego.capturarMovimiento(allowedKeys[e.keyCode]);
 });
