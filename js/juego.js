@@ -148,7 +148,7 @@ Juego.buclePrincipal = function() {
   // Esto es una forma de llamar a la funcion Juego.buclePrincipal() repetidas veces
   idAnimation = window.requestAnimationFrame(function(){self.buclePrincipal()});
   // Esto es para frezar el juego cuando ganamos o perdemos
-  if (Juego.ganoJuego() || Juego.terminoJuego() == !Juego.estaJugando) {
+  if (self.ganoJuego() || self.terminoJuego() == !self.estaJugando) {
   window.cancelAnimationFrame(idAnimation);
   }
 };
@@ -178,29 +178,11 @@ Juego.capturarMovimiento = function(tecla) {
   if (tecla == 'abajo') {
     movY = velocidad;
   }
-
   // Si se puede mover hacia esa posicion hay que hacer efectivo este movimiento
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
     /* Aca tiene que estar la logica para mover al jugador invocando alguno
     de sus metodos  */
     Jugador.mover(movX,movY);
-    if(tecla == 'der'){
-      Jugador.sprite = 'imagenes/auto_rojo_derecha.png';
-      Jugador.ancho = 30;
-      Jugador.alto = 15;
-    } else if (tecla == 'izq') {
-      Jugador.sprite = 'imagenes/auto_rojo_izquierda.png';
-      Jugador.ancho = 30;
-      Jugador.alto = 15;
-    } else if (tecla == 'arriba') {
-      Jugador.sprite = 'imagenes/auto_rojo_arriba.png';
-      Jugador.ancho = 15;
-      Jugador.alto = 30;
-    } else if (tecla == 'abajo') {
-      Jugador.sprite = 'imagenes/auto_rojo_abajo.png';
-      Jugador.ancho = 15;
-      Jugador.alto = 30;
-    }
   }
 };
 
@@ -250,10 +232,9 @@ Juego.moverEnemigos = function() {
   })
 };
 //Movimiento spikeball
-Juego.chequearColisionesNem = function(spike,x, y) {
-  //var spike = this.enemigos[11];
+Juego.chequearColisionesSpike = function(spike,x, y) {
   var puedeMoverse = true
-  Juego.obstaculos().forEach(function(obstaculo) {
+  this.obstaculos().forEach(function(obstaculo) {
     if (this.intersecan(obstaculo, spike, x, y)) {
       puedeMoverse = false
     }

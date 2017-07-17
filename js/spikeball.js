@@ -22,7 +22,7 @@ spikeball.prototype.mover = function(){
     movY = (-this.velocidad/2);
   }
 //cheque que sea un movimiento valido sino inivierte la direccion del movimiento
- if (Juego.chequearColisionesNem(this, movX + this.x, movY + this.y)){
+ if (Juego.chequearColisionesSpike(this, movX + this.x, movY + this.y)){
    this.x = (this.x + movX);
    this.y = (this.y + movY);
  } else {
