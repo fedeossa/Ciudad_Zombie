@@ -136,17 +136,18 @@ Juego.comenzar = function() {
 var idAnimation;
 
 Juego.buclePrincipal = function() {
-  if(Juego.pausa) {
+  if(this.pausa) {
     setTimeout(Juego.buclePrincipal,1000);
     return;
   };
+  //e necesario declarar por el hecho de cuando se hace pausa se reinicia la logica
   var self = Juego;
   // Con update se actualiza la logica del juego, tanto ataques como movimientos
   self.update();
   // Funcion que dibuja por cada fotograma a los objetos en pantalla.
   self.dibujar();
   // Esto es una forma de llamar a la funcion Juego.buclePrincipal() repetidas veces
-  idAnimation = window.requestAnimationFrame(function(){self.buclePrincipal()});
+  idAnimation = window.requestAnimationFrame(function(){Juego.buclePrincipal()});
   // Esto es para frezar el juego cuando ganamos o perdemos
   if (self.ganoJuego() || self.terminoJuego() == !self.estaJugando) {
   window.cancelAnimationFrame(idAnimation);
@@ -216,7 +217,7 @@ Juego.dibujar = function() {
     Dibujante.dibujarRectangulo('red', x, 0, tamanio, 8);
   }
   //El dibunate escribe la cuenta de cuantos zombie hemos pisado
-  if (Juego.manchaSangre.length >= 1) {
+  if (this.manchaSangre.length >= 1) {
     Dibujante.escribir("Zombie Kills = " + Juego.manchaSangre.length, 250,50,"20px Arial")
   }
   // Indica llegada
@@ -333,9 +334,9 @@ Juego.iniciarRecursos();
 Juego.pausar = function(tecla) {
   //pausa
   if (tecla == "p") {
-    Juego.pausa = true;
+    this.pausa = true;
   } else {
-    Juego.pausa = false;
+    this.pausa = false;
   }
 }
 
