@@ -9,7 +9,7 @@ var Jugador = {
   ancho: 15,
   alto: 30,
   velocidad: 10,
-  vidas: 30,
+  vidas: 40,
 
 // Metodo para mover el jugador
   mover(x,y){
