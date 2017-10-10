@@ -71,7 +71,7 @@ var Juego = {
     new ZombieCaminante("imagenes/zombie4.png",400,90,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557},0),
 //ZombieConductor
     new ZombieConductor("imagenes/tren_vertical.png",644,0,30,90,6,{desdeX: 614, hastaX: 674, desdeY: 0, hastaY: 577},"v"),
-    new ZombieConductor("imagenes/tren_vertical.png",678,0,30,90,4,{desdeX: 648, hastaX: 708, desdeY: 0, hastaY: 577},"v"),
+    new ZombieConductor("imagenes/tren_vertical.png",674,0,30,90,4,{desdeX: 648, hastaX: 708, desdeY: 0, hastaY: 577},"v"),
     new ZombieConductor("imagenes/tren_horizontal.png",400,322,90,30,8,{desdeX: 0, hastaX: 961, desdeY: 292, hastaY: 352},"h"),
 //spikeball
     new spikeball("imagenes/spikeball.png",260,430,16,16,2,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557},0),
@@ -184,19 +184,31 @@ Juego.capturarMovimiento = function(tecla) {
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
     /* Aca tiene que estar la logica para mover al jugador invocando alguno
     de sus metodos  */
-    Jugador.mover(movX,movY);
+    Jugador.mover(movX,movY);     
   }
 };
 
 Juego.dibujar = function() {
   // Borrar el fotograma actual
+  var ctx = Dibujante.canvas.getContext('2d');
+  
   Dibujante.borrarAreaDeJuego();
+  
+  ctx.save();
+  
   //Se pinta la imagen de fondo segun el estado del juego
   this.dibujarFondo();
+  
+  
+  
+       
+  
+  
   /* Aca hay que agregar la logica para poder dibujar al jugador principal
   utilizando al dibujante y los metodos que nos brinda.
   "Dibujante dibuja al jugador" */
-  Dibujante.dibujarEntidad(Jugador);
+  Dibujante.dibujarEntidad(Jugador);  
+  
   // Se recorren los obstaculos de la carretera pintandolos
   this.obstaculosCarretera.forEach(function(obstaculo) {
     Dibujante.dibujarEntidad(obstaculo);
@@ -209,6 +221,7 @@ Juego.dibujar = function() {
   this.manchaSangre.forEach(function(sangreZombie) {
     Dibujante.dibujarEntidad(sangreZombie);
   });
+  
 
   // El dibujante dibuja las vidas del jugador
   var tamanio = this.anchoCanvas / this.vidasInicial;
@@ -223,6 +236,13 @@ Juego.dibujar = function() {
   }
   // Indica llegada
   Dibujante.dibujarRectangulo('green', 760, 540, 126, 8);
+
+//Mascara de canvas
+  console.log(this.jugador.x,this.jugador.y);  
+  ctx.arc(this.jugador.x,this.jugador.y, 50, 0, 2 * Math.PI, false);
+  ctx.clip();
+  ctx.restore();
+    
 };
 
 /* Recorre los enemigos haciendo que se muevan. De la misma forma que hicimos
@@ -329,7 +349,7 @@ Juego.terminoJuego = function() {
 
 /* Se gana el juego si se sobre pasa cierto altura y */
 Juego.ganoJuego = function() {
-  return (this.jugador.y + this.jugador.alto) > 530;
+  return (this.jugador.y + this.jugador.alto) > 540;
 };
 
 Juego.iniciarRecursos();
@@ -386,25 +406,25 @@ function nivel2(){
     new Obstaculo('', 943, 5, 18, 572, 0),
     // Veredas
     //Verticales
-    new Obstaculo('', 52, 52, 15, 490, 2),
-    new Obstaculo('', 227, 105, 15, 143, 2),
-    new Obstaculo('', 227, 315, 15, 143, 2),
-    new Obstaculo('', 502, 105, 15, 143, 2),
-    new Obstaculo('', 502, 315, 15, 143, 2),
-    new Obstaculo('', 586, 105, 15, 352, 2),
+    new Obstaculo('', 52, 52, 15, 500, 2),
+    new Obstaculo('', 227, 111, 15, 128, 2),
+    new Obstaculo('', 227, 321, 15, 128, 2),
+    new Obstaculo('', 504, 111, 15, 128, 2),
+    new Obstaculo('', 504, 321, 15, 128, 2),
+    new Obstaculo('', 586, 111, 15, 352, 2),
     new Obstaculo('', 742, 0, 15, 56, 2),
-    new Obstaculo('', 742, 105, 15, 352, 2),
-    new Obstaculo('', 742, 514, 15, 55, 2),
+    new Obstaculo('', 742, 111, 15, 352, 2),
+    new Obstaculo('', 742, 540, 15, 55, 2),
     new Obstaculo('', 888, 0, 15, 569, 2),
     //Horizontales    
-    new Obstaculo('', 52, 52, 704, 15, 2),
-    new Obstaculo('', 52, 526, 704, 15, 2),
-    new Obstaculo('', 227, 105, 222, 15, 2),
-    new Obstaculo('', 227, 231, 222, 15, 2),
-    new Obstaculo('', 227, 316, 222, 15, 2),
-    new Obstaculo('', 227, 442, 222, 15, 2),
-    new Obstaculo('', 586, 105, 200, 15, 2),
-    new Obstaculo('', 586, 442, 200, 15, 2),
+    new Obstaculo('', 52, 52, 705, 15, 2),
+    new Obstaculo('', 52, 540, 704, 15, 2),
+    new Obstaculo('', 227, 111, 292, 15, 2),
+    new Obstaculo('', 227, 237, 292, 15, 2),
+    new Obstaculo('', 227, 321, 292, 15, 2),
+    new Obstaculo('', 227, 449, 292, 15, 2),
+    new Obstaculo('', 586, 111, 170, 15, 2),
+    new Obstaculo('', 586, 449, 170, 15, 2),
   ];
   // Los enemigos se agregaran en este arreglo.
   Juego.enemigos = [
@@ -437,7 +457,7 @@ function nivel2(){
       Dibujante.dibujarImagen('imagenes/Splash.png', 190, 113, 500, 203);
       document.getElementById('reiniciar').style.visibility = 'visible';
     } else {
-      Dibujante.dibujarImagen("imagenes/mapa2a.png", 0, 0, this.anchoCanvas, this.altoCanvas);
+      Dibujante.dibujarImagen("imagenes/mapa2a.png", 0, 5, this.anchoCanvas, this.altoCanvas);
     }
   };
 }

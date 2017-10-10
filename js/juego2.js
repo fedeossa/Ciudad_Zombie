@@ -49,25 +49,25 @@ var Juego = {
     new Obstaculo('', 943, 5, 18, 572, 0),
     // Veredas
     //Verticales
-    new Obstaculo('', 52, 52, 15, 490, 2),
-    new Obstaculo('', 227, 105, 15, 143, 2),
-    new Obstaculo('', 227, 315, 15, 143, 2),
-    new Obstaculo('', 502, 105, 15, 143, 2),
-    new Obstaculo('', 502, 315, 15, 143, 2),
-    new Obstaculo('', 586, 105, 15, 352, 2),
+    new Obstaculo('', 52, 52, 15, 500, 2),
+    new Obstaculo('', 227, 111, 15, 128, 2),
+    new Obstaculo('', 227, 321, 15, 128, 2),
+    new Obstaculo('', 504, 111, 15, 128, 2),
+    new Obstaculo('', 504, 321, 15, 128, 2),
+    new Obstaculo('', 586, 111, 15, 352, 2),
     new Obstaculo('', 742, 0, 15, 56, 2),
-    new Obstaculo('', 742, 105, 15, 352, 2),
-    new Obstaculo('', 742, 514, 15, 55, 2),
+    new Obstaculo('', 742, 111, 15, 352, 2),
+    new Obstaculo('', 742, 540, 15, 55, 2),
     new Obstaculo('', 888, 0, 15, 569, 2),
     //Horizontales    
-    new Obstaculo('', 52, 52, 704, 15, 2),
-    new Obstaculo('', 52, 526, 704, 15, 2),
-    new Obstaculo('', 227, 105, 222, 15, 2),
-    new Obstaculo('', 227, 231, 222, 15, 2),
-    new Obstaculo('', 227, 316, 222, 15, 2),
-    new Obstaculo('', 227, 442, 222, 15, 2),
-    new Obstaculo('', 586, 105, 200, 15, 2),
-    new Obstaculo('', 586, 442, 200, 15, 2),
+    new Obstaculo('', 52, 52, 705, 15, 2),
+    new Obstaculo('', 52, 540, 704, 15, 2),
+    new Obstaculo('', 227, 111, 292, 15, 2),
+    new Obstaculo('', 227, 237, 292, 15, 2),
+    new Obstaculo('', 227, 321, 292, 15, 2),
+    new Obstaculo('', 227, 449, 292, 15, 2),
+    new Obstaculo('', 586, 111, 170, 15, 2),
+    new Obstaculo('', 586, 449, 170, 15, 2),
   ],
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
@@ -233,6 +233,26 @@ Juego.dibujar = function() {
   }
   // Indica llegada
   Dibujante.dibujarRectangulo('green', 760, 540, 126, 8);
+
+  Dibujante.dibujarRectangulo('green', 52, 52, 15, 500, 2);
+  Dibujante.dibujarRectangulo('green', 227, 111, 15, 128, 2);
+  Dibujante.dibujarRectangulo('green', 227, 321, 15, 128, 2);
+  Dibujante.dibujarRectangulo('green', 504, 111, 15, 128, 2);
+  Dibujante.dibujarRectangulo('green', 504, 321, 15, 128, 2);
+  Dibujante.dibujarRectangulo('green', 586, 111, 15, 352, 2);
+  Dibujante.dibujarRectangulo('green', 742, 0, 15, 56, 2);
+  Dibujante.dibujarRectangulo('green', 742, 111, 15, 352, 2);
+  Dibujante.dibujarRectangulo('green', 742, 540, 15, 55, 2);
+  Dibujante.dibujarRectangulo('green', 888, 0, 15, 569, 2);
+  //Horizontales    
+  Dibujante.dibujarRectangulo('green', 52, 52, 705, 15, 2);
+  Dibujante.dibujarRectangulo('green', 52, 540, 704, 15, 2);
+  Dibujante.dibujarRectangulo('green', 227, 111, 292, 15, 2);
+  Dibujante.dibujarRectangulo('green', 227, 237, 292, 15, 2);
+  Dibujante.dibujarRectangulo('green', 227, 321, 292, 15, 2);
+  Dibujante.dibujarRectangulo('green', 227, 449, 292, 15, 2);
+  Dibujante.dibujarRectangulo('green', 586, 111, 170, 15, 2);
+  Dibujante.dibujarRectangulo('green', 586, 449, 170, 15, 2);
 };
 
 /* Recorre los enemigos haciendo que se muevan. De la misma forma que hicimos
@@ -326,7 +346,7 @@ Juego.dibujarFondo = function() {
     Dibujante.dibujarImagen('imagenes/Splash.png', 190, 113, 500, 203);
     document.getElementById('reiniciar').style.visibility = 'visible';
   } else {
-    Dibujante.dibujarImagen('imagenes/mapa2a.png', 0, 0, this.anchoCanvas, this.altoCanvas);
+    Dibujante.dibujarImagen('imagenes/mapa2a.png', 0, 5, this.anchoCanvas, this.altoCanvas);
   }
 };
 

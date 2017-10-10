@@ -42,5 +42,13 @@ var Dibujante = {
     var ctx = this.canvas.getContext('2d');
     ctx.font = font;
     ctx.fillText(text,x,y);
+  },
+  //Luces del auto;
+  /*
+  luces: function(x,y){
+    var ctx = this.canvas.getContext('2d');
+    ctx.arc(x,y, 50, 0, 2 * Math.PI, false);
+    ctx.clip();
   }
+  */
 }
