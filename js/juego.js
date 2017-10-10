@@ -189,21 +189,10 @@ Juego.capturarMovimiento = function(tecla) {
 };
 
 Juego.dibujar = function() {
-  // Borrar el fotograma actual
-  var ctx = Dibujante.canvas.getContext('2d');
-  
-  Dibujante.borrarAreaDeJuego();
-  
-  ctx.save();
-  
+  // Borrar el fotograma actual  
+  Dibujante.borrarAreaDeJuego();  
   //Se pinta la imagen de fondo segun el estado del juego
-  this.dibujarFondo();
-  
-  
-  
-       
-  
-  
+  this.dibujarFondo(); 
   /* Aca hay que agregar la logica para poder dibujar al jugador principal
   utilizando al dibujante y los metodos que nos brinda.
   "Dibujante dibuja al jugador" */
@@ -238,11 +227,13 @@ Juego.dibujar = function() {
   Dibujante.dibujarRectangulo('green', 760, 540, 126, 8);
 
 //Mascara de canvas
-  console.log(this.jugador.x,this.jugador.y);  
+  /*console.log(this.jugador.x,this.jugador.y); 
+  var ctx = Dibujante.canvas.getContext('2d');
+  ctx.save(); 
   ctx.arc(this.jugador.x,this.jugador.y, 50, 0, 2 * Math.PI, false);
   ctx.clip();
   ctx.restore();
-    
+  */
 };
 
 /* Recorre los enemigos haciendo que se muevan. De la misma forma que hicimos
@@ -444,6 +435,11 @@ function nivel2(){
     new spikeball("imagenes/spikeball.png",260,420,16,16,2,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557},0),
     new spikeball("imagenes/spikeball.png",450,130,16,16,2,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557},0)
   ];
+    //Zombies atropellados
+  Juego.manchaSangre = [
+      //aca se van a push los zombies pisados..
+    ];
+
   Juego.dibujarFondo = function() {
     // Si se termino el juego hay que mostrar el mensaje de game over de fondo
     if (this.terminoJuego() == !this.estaJugando) {
