@@ -44,8 +44,10 @@ ZombieCaminante.prototype.atacar = function (jugador) {
   if (this.die >= 1) {
     var sangreZombie = new Sangre("imagenes/blood.png",this.x,this.y,15,15)
     Juego.manchaSangre.push(sangreZombie);
+    /*
     this.x = (Math.random()*921+20);
     this.y = (Math.random()*537+20);
+    */
     this.velocidad = 2;
   }
   jugador.perderVida(1);

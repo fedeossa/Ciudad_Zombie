@@ -434,8 +434,8 @@ function nivel2(){
     new ZombieConductor("imagenes/tren_vertical.png",644,0,30,90,6,{desdeX: 616, hastaX: 676, desdeY: -80, hastaY: 577},"v"),
     new ZombieConductor("imagenes/tren_vertical.png",674,0,30,90,2,{desdeX: 646, hastaX: 706, desdeY: -150, hastaY: 280},"v"),
     //spikeball
-    new spikeball("imagenes/spikeball.png",260,420,16,16,2,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557},0),
-    new spikeball("imagenes/spikeball.png",450,130,16,16,2,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557},0)
+    new spikeball("imagenes/spikeball.png",160,420,16,16,2,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557},0),
+    new spikeball("imagenes/spikeball.png",160,130,16,16,2,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557},0)
   ];
     //Zombies atropellados
   Juego.manchaSangre = [
